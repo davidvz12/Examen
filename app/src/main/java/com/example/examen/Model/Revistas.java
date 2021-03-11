@@ -1,5 +1,11 @@
 package com.example.examen.Model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class Revistas {
 
     String journal_id,portada,abbreviation,description,name;
@@ -47,7 +53,6 @@ public class Revistas {
         this.description = description;
     }
 
-
     public String getName() {
         return name;
     }
@@ -55,4 +60,22 @@ public class Revistas {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Revistas(JSONObject a) throws JSONException {
+
+        journal_id =  "Journal_id :" + a.getString("journal_id").toString();
+        portada =  a.getString("portada").toString() ;
+        abbreviation =  "Abbreviation : "+a.getString("abbreviation").toString() ;
+        description = "Description : " + a.getString("description").toString() ;
+        name = a.getString("name").toString() ;
+    }
+
+    public static ArrayList<Revistas> JsonObjectsBuild(JSONArray datos) throws JSONException {
+        ArrayList<Revistas> revista = new ArrayList<>();
+        for (int i = 0; i < datos.length(); i++) {
+            revista.add(new Revistas(datos.getJSONObject(i)));
+        }
+        return revista;
+    }
+
 }
