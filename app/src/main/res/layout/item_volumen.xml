@@ -65,10 +65,28 @@
                 android:id="@+id/txtnumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtDoy"
+                android:layout_below="@id/txtissui"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/imgCover"
-                android:text="ISSUI"
+                android:text="Number"
+                />
+            <TextView
+                android:id="@+id/txtVolumen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtnumber"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/imgCover"
+                android:text="Volumen"
+                />
+            <TextView
+                android:id="@+id/txtYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtnumber"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/txtVolumen"
+                android:text="year"
                 />
 
 

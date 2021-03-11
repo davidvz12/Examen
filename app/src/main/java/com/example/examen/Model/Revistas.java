@@ -2,14 +2,13 @@ package com.example.examen.Model;
 
 public class Revistas {
 
-    String journal_id,portada,abbreviation,description,journalThumbnail,name;
+    String journal_id,portada,abbreviation,description,name;
 
-    public Revistas(String journal_id, String portada, String abbreviation, String description, String journalThumbnail, String name) {
+    public Revistas(String journal_id, String portada, String abbreviation, String description, String name) {
         this.journal_id = journal_id;
         this.portada = portada;
         this.abbreviation = abbreviation;
         this.description = description;
-        this.journalThumbnail = journalThumbnail;
         this.name = name;
     }
 
@@ -48,13 +47,6 @@ public class Revistas {
         this.description = description;
     }
 
-    public String getJournalThumbnail() {
-        return journalThumbnail;
-    }
-
-    public void setJournalThumbnail(String journalThumbnail) {
-        this.journalThumbnail = journalThumbnail;
-    }
 
     public String getName() {
         return name;

@@ -2,24 +2,18 @@ package com.example.examen.Model;
 
 public class Edicion {
 
-    String authors,date_published,doi,publication_id,section,section_id,UrlViewGalley,nombres;
+    String authors,date_published,section,UrlViewGalley;
 
-
-    public Edicion(String authors, String date_published, String doi, String publication_id, String section, String section_id, String urlViewGalley, String nombres) {
+    public Edicion(String authors, String date_published, String section, String urlViewGalley) {
         this.authors = authors;
         this.date_published = date_published;
-        this.doi = doi;
-        this.publication_id = publication_id;
         this.section = section;
-        this.section_id = section_id;
         UrlViewGalley = urlViewGalley;
-        this.nombres = nombres;
     }
 
     public Edicion() {
 
     }
-
     public String getAuthors() {
         return authors;
     }
@@ -36,22 +30,6 @@ public class Edicion {
         this.date_published = date_published;
     }
 
-    public String getDoi() {
-        return doi;
-    }
-
-    public void setDoi(String doi) {
-        this.doi = doi;
-    }
-
-    public String getPublication_id() {
-        return publication_id;
-    }
-
-    public void setPublication_id(String publication_id) {
-        this.publication_id = publication_id;
-    }
-
     public String getSection() {
         return section;
     }
@@ -60,13 +38,6 @@ public class Edicion {
         this.section = section;
     }
 
-    public String getSection_id() {
-        return section_id;
-    }
-
-    public void setSection_id(String section_id) {
-        this.section_id = section_id;
-    }
 
     public String getUrlViewGalley() {
         return UrlViewGalley;
@@ -76,11 +47,4 @@ public class Edicion {
         UrlViewGalley = urlViewGalley;
     }
 
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
 }
