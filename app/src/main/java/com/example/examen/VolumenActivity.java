@@ -19,56 +19,56 @@ import com.example.examen.WebService.WebService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements Asynchtask {
+public class VolumenActivity extends AppCompatActivity implements Asynchtask {
     RecyclerView recyclerView;
-    ArrayList<Revistas> lstResvistas;
+    ArrayList<Revistas> lstVolumen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_volumen);
 
-
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewVolumen);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        Bundle bundle = this.getIntent().getExtras();
+
+
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("https://revistas.uteq.edu.ec/ws/journals.php",
-                datos, MainActivity.this, MainActivity.this);
+        WebService ws= new WebService("https://revistas.uteq.edu.ec/ws/issues.php?j_id="+bundle.getString("journal_id"),
+                datos, VolumenActivity.this, VolumenActivity.this);
         ws.execute("GET");
     }
 
     @Override
     public void processFinish(String result) throws JSONException {
 
-       lstResvistas = new ArrayList<> ();
+        lstVolumen = new ArrayList<> ();
         try {
-            JSONArray JSONlistaRevista=  new JSONArray(result);
-            lstResvistas = Revistas.JsonObjectsBuild(JSONlistaRevista);
-            RevistaAdapter adapaterRevista= new RevistaAdapter(this, lstResvistas);
+            JSONArray JSONlistaVolumen=  new JSONArray(result);
+            lstVolumen = Revistas.JsonObjectsBuild(JSONlistaVolumen);
+            RevistaAdapter adapaterVolumen= new RevistaAdapter(this, lstVolumen);
             int resId = R.anim.layout_animation_down_to_up;
             LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getApplicationContext(),
                     resId);
-            adapaterRevista.setOnClickListener(new View.OnClickListener() {
+            adapaterVolumen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Toast.makeText(MainActivity.this,lstResvistas.get(recyclerView.getChildAdapterPosition(v)).getJournal_id(),Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(MainActivity.this, VolumenActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("journal_id", lstResvistas.get(recyclerView.getChildAdapterPosition(v)).getJournal_id().replace("Journal_id :",""));
-                    intent.putExtras(b);
-                    startActivity(intent);
+                    //Intent intent = new Intent(VolumenActivity.this, VolumenActivity.class);
+                    //Bundle b = new Bundle();
+                    //b.putString("journal_id", lstVolumen.get(recyclerView.getChildAdapterPosition(v)).getJournal_id().replace("Journal_id :",""));
+                    //intent.putExtras(b);
+                    //startActivity(intent);
                 }
             });
             recyclerView.setLayoutAnimation(animation);
-            recyclerView.setAdapter(adapaterRevista);
+            recyclerView.setAdapter(adapaterVolumen);
 
         }catch (JSONException e)
         {

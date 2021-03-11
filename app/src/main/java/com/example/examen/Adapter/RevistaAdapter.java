@@ -16,10 +16,11 @@ import com.example.examen.R;
 
 import java.util.List;
 
-public class RevistaAdapter extends RecyclerView.Adapter<RevistaAdapter.RevistaViewHolder>{
+public class RevistaAdapter extends RecyclerView.Adapter<RevistaAdapter.RevistaViewHolder> implements View.OnClickListener{
 
     private Context Ctx;
     private List<Revistas> lstRevista;
+    private View.OnClickListener v;
 
     public RevistaAdapter(Context mCtx, List<Revistas> revista) {
         this.lstRevista = revista;
@@ -31,6 +32,7 @@ public class RevistaAdapter extends RecyclerView.Adapter<RevistaAdapter.RevistaV
     public RevistaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(Ctx);
         View view = inflater.inflate(R.layout.item_revistas, null);
+        view.setOnClickListener(this);
         return new RevistaViewHolder(view);
     }
 
@@ -48,9 +50,21 @@ public class RevistaAdapter extends RecyclerView.Adapter<RevistaAdapter.RevistaV
                 .into(holder.imgPortada);
     }
 
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.v = listener;
+    }
     @Override
     public int getItemCount() {
         return lstRevista.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(v!=null){
+            v.onClick(view);
+        }
+
     }
 
     public class RevistaViewHolder extends RecyclerView.ViewHolder {
