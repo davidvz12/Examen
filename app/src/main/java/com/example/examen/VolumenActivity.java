@@ -64,7 +64,12 @@ public class VolumenActivity extends AppCompatActivity implements Asynchtask {
             adapaterVolumen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(VolumenActivity.this,lstVolumen.get(mLoadMoreView.getChildAdapterPosition(v)).getIssue_id(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(VolumenActivity.this,lstVolumen.get(mLoadMoreView.getChildAdapterPosition(v)).getIssue_id(),Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(VolumenActivity.this, EdicionActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("Issue_id", lstVolumen.get(mLoadMoreView.getChildAdapterPosition(v)).getIssue_id().replace("Issue id : ",""));
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             });
 

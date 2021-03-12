@@ -60,11 +60,11 @@
                 android:text="Url" />
 
             <Button
+                android:id="@+id/btnPDF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtUrl"
-                android:text="PDF">
-            </Button>
+                android:text="PDF"></Button>
 
 
         </RelativeLayout>
