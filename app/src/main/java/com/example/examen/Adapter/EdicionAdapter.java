@@ -1,29 +1,23 @@
 package com.example.examen.Adapter;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.example.examen.Model.Edicion;
-import com.example.examen.Model.Volumenes;
 import com.example.examen.R;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 public class EdicionAdapter extends InfinitePlaceHolderView.Adapter<EdicionAdapter.EdicionViewHolder> implements View.OnClickListener{
@@ -71,39 +65,29 @@ public class EdicionAdapter extends InfinitePlaceHolderView.Adapter<EdicionAdapt
         holder.btnPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DescargarPDF(edicion.getUrlViewGalley(),edicion.getSection());
+                DescargarPDF(edicion.getUrlViewGalley());
+                //Toast.makeText(Ctx,edicion.getUrlViewGalley(),Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    public void DescargarPDF(String pdf,String name) {
-        try {
-            URL url = new URL(pdf);
-            HttpURLConnection c = (HttpURLConnection) url.openConnection();
-            c.setRequestMethod("GET");
-            c.setDoOutput(true);
-            c.connect();
 
-            String Path = Environment.getExternalStorageDirectory() + "/download/";
-            Log.v("PdfManager", "PATH: " + Path);
-            File file = new File(Path);
-            file.mkdirs();
-            FileOutputStream fos = new FileOutputStream(name+".pdf");
+    public void DescargarPDF(String pdf) {
 
-            InputStream is = c.getInputStream();
+        DownloadManager.Request request=new DownloadManager.Request(Uri.parse("http://www.jtech.ua.es/dadm/restringido/android/sesion01-apuntes.pdf"));
 
-            byte[] buffer = new byte[702];
-            int len1 = 0;
-            while ((len1 = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, len1);
-            }
-            fos.close();
-            is.close();
-        } catch (IOException e) {
-            Log.d("PdfManager", "Error: " + e);
-        }
-        Log.v("PdfManager", "Check: ");
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI|
+                DownloadManager.Request.NETWORK_MOBILE);
+        request.setTitle("Download");
+        request.setDescription("Downloading..");
+
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,""+System.currentTimeMillis());
+        DownloadManager manager = (DownloadManager)Ctx.getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+
     }
 
     @Override
