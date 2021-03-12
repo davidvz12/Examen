@@ -3,9 +3,7 @@ package com.example.examen.Adapter;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +15,8 @@ import androidx.annotation.NonNull;
 
 import com.example.examen.Model.Edicion;
 import com.example.examen.R;
-import com.example.examen.RetrivePDFfromUrl;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
 
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 
 public class EdicionAdapter extends InfinitePlaceHolderView.Adapter<EdicionAdapter.EdicionViewHolder> implements View.OnClickListener{
