@@ -1,5 +1,11 @@
 package com.example.examen.Model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class Volumenes {
     String cover,date_published,doi,issue_id,number,title,volume,year;
 
@@ -15,6 +21,27 @@ public class Volumenes {
     }
     public Volumenes() {
     }
+
+    public Volumenes(JSONObject a) throws JSONException {
+
+        date_published =  "Date published :" + a.getString("date_published").toString();
+        doi = "DOI : " + a.getString("doi").toString() ;
+        issue_id =  "Issue id : "+a.getString("issue_id").toString() ;
+        number = "Number : " + a.getString("number").toString() ;
+        title = a.getString("title").toString() ;
+        volume = "Volume : "+a.getString("volume").toString() ;
+        year = "Year : "+ a.getString("year").toString() ;
+        cover = a.getString("cover").toString() ;
+    }
+
+    public static ArrayList<Volumenes> JsonObjectsBuild(JSONArray datos) throws JSONException {
+        ArrayList<Volumenes> volumen = new ArrayList<>();
+        for (int i = 0; i < datos.length(); i++) {
+            volumen.add(new Volumenes(datos.getJSONObject(i)));
+        }
+        return volumen;
+    }
+
     public String getCover() {
         return cover;
     }

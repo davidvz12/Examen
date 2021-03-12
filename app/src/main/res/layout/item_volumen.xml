@@ -61,6 +61,7 @@
                 android:layout_toRightOf="@id/imgCover"
                 android:text="ISSUI"
                 />
+
             <TextView
                 android:id="@+id/txtnumber"
                 android:layout_width="wrap_content"
@@ -68,8 +69,7 @@
                 android:layout_below="@id/txtissui"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/imgCover"
-                android:text="Number"
-                />
+                android:text="Number" />
             <TextView
                 android:id="@+id/txtVolumen"
                 android:layout_width="wrap_content"

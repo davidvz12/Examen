@@ -8,15 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.examen.Model.Revistas;
 import com.example.examen.R;
+import com.mindorks.placeholderview.InfinitePlaceHolderView;
 
 import java.util.List;
 
-public class RevistaAdapter extends RecyclerView.Adapter<RevistaAdapter.RevistaViewHolder> implements View.OnClickListener{
+public class RevistaAdapter extends InfinitePlaceHolderView.Adapter<RevistaAdapter.RevistaViewHolder> implements View.OnClickListener{
 
     private Context Ctx;
     private List<Revistas> lstRevista;
@@ -67,7 +67,7 @@ public class RevistaAdapter extends RecyclerView.Adapter<RevistaAdapter.RevistaV
 
     }
 
-    public class RevistaViewHolder extends RecyclerView.ViewHolder {
+    public class RevistaViewHolder extends InfinitePlaceHolderView.ViewHolder {
         TextView txtNameTitle, txtDescription, txtAbrev,txtJournal;
         ImageView imgPortada;
 

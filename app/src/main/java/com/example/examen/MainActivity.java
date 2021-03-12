@@ -1,6 +1,7 @@
 package com.example.examen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.example.examen.Adapter.RevistaAdapter;
 import com.example.examen.Model.Revistas;
 import com.example.examen.WebService.Asynchtask;
 import com.example.examen.WebService.WebService;
+import com.mindorks.placeholderview.InfinitePlaceHolderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,18 +28,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements Asynchtask {
-    RecyclerView recyclerView;
+
     ArrayList<Revistas> lstResvistas;
+    private InfinitePlaceHolderView mLoadMoreView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        mLoadMoreView = (InfinitePlaceHolderView)findViewById(R.id.infinityPlce);
+        mLoadMoreView.setHasFixedSize(true);
+        mLoadMoreView.setLayoutManager(new LinearLayoutManager(this));
+        mLoadMoreView.setItemAnimator(new DefaultItemAnimator());
 
         Map<String, String> datos = new HashMap<String, String>();
         WebService ws= new WebService("https://revistas.uteq.edu.ec/ws/journals.php",
@@ -62,13 +65,13 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
                     //Toast.makeText(MainActivity.this,lstResvistas.get(recyclerView.getChildAdapterPosition(v)).getJournal_id(),Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, VolumenActivity.class);
                     Bundle b = new Bundle();
-                    b.putString("journal_id", lstResvistas.get(recyclerView.getChildAdapterPosition(v)).getJournal_id().replace("Journal_id :",""));
+                    b.putString("journal_id", lstResvistas.get(mLoadMoreView.getChildAdapterPosition(v)).getJournal_id().replace("Journal_id :",""));
                     intent.putExtras(b);
                     startActivity(intent);
                 }
             });
-            recyclerView.setLayoutAnimation(animation);
-            recyclerView.setAdapter(adapaterRevista);
+            mLoadMoreView.setLayoutAnimation(animation);
+            mLoadMoreView.setAdapter(adapaterRevista);
 
         }catch (JSONException e)
         {
